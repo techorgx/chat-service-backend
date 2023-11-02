@@ -9,12 +9,22 @@
         <version>1.0</version>
     </parent>
 
-    <artifactId>websocket</artifactId>
+    <artifactId>engine</artifactId>
 
     <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <ktor.version>1.6.4</ktor.version>
     </properties>
 
+    <dependencies>
+        <dependency>
+            <groupId>io.ktor</groupId>
+            <artifactId>ktor-server-netty</artifactId>
+            <version>${ktor.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.ktor</groupId>
+            <artifactId>ktor-websockets</artifactId>
+            <version>${ktor.version}</version>
+        </dependency>
+    </dependencies>
 </project>
