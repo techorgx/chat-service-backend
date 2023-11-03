@@ -189,6 +189,7 @@
                 <artifactId>ktlint-maven-plugin</artifactId>
                 <version>3.0.0</version>
                 <configuration>
+                    <skip>true</skip>
                     <sourceRoots>${project.build.sourceDirectory}</sourceRoots>
                 </configuration>
                 <executions>

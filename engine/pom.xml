@@ -12,19 +12,70 @@
     <artifactId>engine</artifactId>
 
     <properties>
-        <ktor.version>1.6.4</ktor.version>
+        <ktor.version>3.0.0-eap-837</ktor.version>
+        <logback.version>1.4.5</logback.version>
     </properties>
 
+    <repositories>
+
+        <!-- JetBrains Ktor EAP Repository -->
+        <repository>
+            <id>ktor-eap</id>
+            <url>https://maven.pkg.jetbrains.space/public/p/ktor/eap</url>
+        </repository>
+        <!-- Maven Central Repository -->
+        <repository>
+            <id>central</id>
+            <url>https://repo.maven.apache.org/maven2</url>
+        </repository>
+
+    </repositories>
+
+
     <dependencies>
+        <!-- Ktor Server Core -->
         <dependency>
             <groupId>io.ktor</groupId>
-            <artifactId>ktor-server-netty</artifactId>
+            <artifactId>ktor-server-core</artifactId>
             <version>${ktor.version}</version>
         </dependency>
+
         <dependency>
             <groupId>io.ktor</groupId>
-            <artifactId>ktor-websockets</artifactId>
+            <artifactId>ktor-client-cio-jvm</artifactId>
             <version>${ktor.version}</version>
+        </dependency>
+
+        <!-- Ktor Server Netty Engine -->
+        <dependency>
+            <groupId>io.ktor</groupId>
+            <artifactId>ktor-server-netty-jvm</artifactId>
+            <version>${ktor.version}</version>
+        </dependency>
+
+        <!-- Ktor WebSockets -->
+        <dependency>
+            <groupId>io.ktor</groupId>
+            <artifactId>ktor-server-websockets-jvm</artifactId>
+            <version>${ktor.version}</version>
+        </dependency>
+
+        <!-- Logback Classic (Logging) -->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback.version}</version>
+        </dependency>
+
+        <!-- Ktor Server Test Host (Testing) -->
+        <dependency>
+            <groupId>io.ktor</groupId>
+            <artifactId>ktor-server-test-host</artifactId>
+            <version>${ktor.version}</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
+
+    <build>
+    </build>
 </project>
