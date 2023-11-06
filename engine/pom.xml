@@ -74,6 +74,13 @@
             <version>${ktor.version}</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- Ktor authentication -->
+        <dependency>
+            <groupId>io.ktor</groupId>
+            <artifactId>ktor-server-auth-jvm</artifactId>
+            <version>${ktor.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
