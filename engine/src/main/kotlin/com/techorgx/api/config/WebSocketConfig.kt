@@ -1,21 +1,20 @@
 package com.techorgx.api.config
 
-import io.ktor.server.application.Application
-import io.ktor.server.application.install
-import io.ktor.server.auth.*
-import io.ktor.server.websocket.*
-import java.time.Duration
+import org.springframework.context.annotation.Configuration
+import org.springframework.messaging.simp.config.MessageBrokerRegistry
+import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker
+import org.springframework.web.socket.config.annotation.StompEndpointRegistry
+import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer
 
-fun Application.config() {
-    install(WebSockets) {
-        pingPeriod = Duration.ofSeconds(15)
-        timeout = Duration.ofSeconds(15)
-        maxFrameSize = Long.MAX_VALUE
-        masking = false
+@Configuration
+@EnableWebSocketMessageBroker
+open class WebSocketConfig : WebSocketMessageBrokerConfigurer {
+    override fun configureMessageBroker(config: MessageBrokerRegistry) {
+//        config.enableSimpleBroker("/topic");
+        config.setApplicationDestinationPrefixes("/app");
     }
 
-    install(Authentication) {
-        bearer {
-        }
+    override fun registerStompEndpoints(registry: StompEndpointRegistry) {
+        registry.addEndpoint("/chat-app");
     }
 }

@@ -1,12 +1,14 @@
 package com.techorgx.api
 
-import com.techorgx.api.config.config
-import com.techorgx.api.routing.router
-import io.ktor.server.application.Application
+import org.springframework.boot.autoconfigure.SpringBootApplication
+import org.springframework.boot.context.properties.ConfigurationPropertiesScan
+import org.springframework.boot.runApplication
 
-fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
+@SpringBootApplication
+@ConfigurationPropertiesScan
+open class Application
 
-fun Application.module() {
-    config()
-    router()
+fun main(args: Array<String>) {
+    @Suppress("SpreadOperator")
+    runApplication<Application>(*args)
 }
