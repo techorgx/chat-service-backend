@@ -2,30 +2,42 @@ const stompClient = new StompJs.Client({
     brokerURL: 'ws://localhost:8080/chat-app'
 });
 
+const headers = {
+    Authorization: 'Bearer your_token', // Replace with your actual authentication token
+    Username: 'your_username' // Replace with your actual username
+};
+
+stompClient.configure({
+    connectHeaders: headers,
+});
+
 stompClient.onConnect = (frame) => {
-    setConnected(true);
-    console.log('Connected: ' + frame);
+     setConnected(true);
+     sendAuthenticationHeaders(); // Sending headers only when connected
+     console.log('Connected: ' + frame);
 };
 
-stompClient.onWebSocketError = (error) => {
-    console.error('Error with websocket', error);
-};
-
-stompClient.onStompError = (frame) => {
-    console.error('Broker reported error: ' + frame.headers['message']);
-    console.error('Additional details: ' + frame.body);
-};
+function sendAuthenticationHeaders(connected) {
+        stompClient.publish({
+            destination: '/app/on-connect',
+            headers: {
+                Authorization: 'Bearer your_token', // Replace with your actual authentication token
+                Username: 'your_username' // Replace with your actual username
+            }
+        });
+}
 
 function setConnected(connected) {
-    $("#connect").prop("disabled", connected);
-    $("#disconnect").prop("disabled", !connected);
     if (connected) {
-        $("#conversation").show();
+        $("#status").text("Connected");
+        $("#connect").prop("disabled", true);
+        $("#disconnect").prop("disabled", false);
+    } else {
+        // Update UI or perform actions when disconnected
+        $("#status").text("Disconnected");
+        $("#connect").prop("disabled", false);
+        $("#disconnect").prop("disabled", true);
     }
-    else {
-        $("#conversation").hide();
-    }
-    $("#greetings").html("");
 }
 
 function connect() {
@@ -38,20 +50,16 @@ function disconnect() {
     console.log("Disconnected");
 }
 
-function sendName() {
+function sendMessage() {
     stompClient.publish({
         destination: "/app/send-message",
-        body: JSON.stringify({'name': $("#name").val()})
+        body: JSON.stringify({'message': $("#message").val()})
     });
-}
-
-function showGreeting(message) {
-    $("#greetings").append("<tr><td>" + message + "</td></tr>");
 }
 
 $(function () {
     $("form").on('submit', (e) => e.preventDefault());
     $( "#connect" ).click(() => connect());
     $( "#disconnect" ).click(() => disconnect());
-    $( "#send" ).click(() => sendName());
+    $( "#send" ).click(() => sendMessage());
 });
