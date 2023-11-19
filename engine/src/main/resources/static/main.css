@@ -49,9 +49,23 @@ body {
     touch-action: manipulation;
 }
 
+#username {
+    margin-left: 10px;
+    width: 200px; /* Adjust the width as needed */
+    box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;
+    border-radius: 8px;
+    height: 4rem;
+    padding: 0 1.6rem;
+    text-align: center;
+    transition: all .5s;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
 #message {
     margin-left: 10px;
-    width: 500px; /* Adjust the width as needed */
+    width: 300px; /* Adjust the width as needed */
     box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;
     border-radius: 8px;
     height: 4rem;

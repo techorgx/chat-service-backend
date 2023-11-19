@@ -12,10 +12,17 @@
     <artifactId>engine</artifactId>
 
     <properties>
-        <ktor.version>3.0.0-eap-837</ktor.version>
+        <lettuce.version>6.3.0.RELEASE</lettuce.version>
         <logback.version>1.4.5</logback.version>
     </properties>
 
+    <dependencies>
+        <dependency>
+            <groupId>io.lettuce</groupId>
+            <artifactId>lettuce-core</artifactId>
+            <version>${lettuce.version}</version>
+        </dependency>
+    </dependencies>
     <build>
     </build>
 </project>
