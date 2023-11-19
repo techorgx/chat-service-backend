@@ -51,10 +51,15 @@ function disconnect() {
 }
 
 function sendMessage() {
+    var payload = {
+        username: $("#username").val(),
+        message: $("#message").val()
+    };
     stompClient.publish({
         destination: "/app/send-message",
-        body: JSON.stringify({'message': $("#message").val()})
+        body: JSON.stringify(payload)
     });
+    document.getElementById("message").value = "";
 }
 
 $(function () {
