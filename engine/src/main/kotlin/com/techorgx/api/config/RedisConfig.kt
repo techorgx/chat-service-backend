@@ -1,5 +1,6 @@
 package com.techorgx.api.config
 
+import com.techorgx.api.mapper.PayloadMapper
 import io.lettuce.core.RedisClient
 import io.lettuce.core.api.StatefulRedisConnection
 import io.lettuce.core.api.async.RedisAsyncCommands
@@ -18,7 +19,8 @@ open class RedisConfig(
     @Value("\${redis.host}")
     private val redisHost: String,
     @Value("\${redis.port}")
-    private val redisPort: Int
+    private val redisPort: Int,
+    private val payloadMapper: PayloadMapper
 ) {
 
     private lateinit var pubSubConnection: StatefulRedisPubSubConnection<String, String>
@@ -43,7 +45,8 @@ open class RedisConfig(
 
     private var listener: RedisPubSubListener<String, String> = object : RedisPubSubAdapter<String, String>() {
         override fun message(channel: String, message: String) {
-            println(String.format("Channel: %s, Message: %s", channel, message))
+            val payload = payloadMapper.mapPayload(message)
+            println(String.format("Channel: %s, Message: %s", channel, payload))
         }
     }
 

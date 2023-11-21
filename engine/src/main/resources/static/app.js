@@ -113,4 +113,4 @@ $(document).ready(function () {
             // Enable the Connect button if there is some text in the input
             $("#connect").prop("disabled", $(this).val().trim() === "");
         });
-    });
+});
