@@ -2,9 +2,7 @@ const stompClient = new StompJs.Client({
     brokerURL: 'ws://localhost:8080/chat-app'
 });
 
-
 function sendAuthenticationHeaders(connected) {
-
        stompClient.publish({
                    destination: '/app/on-connect',
                    headers: {
@@ -22,12 +20,10 @@ stompClient.onConnect = (frame) => {
 
 function setConnected(connected) {
     if (connected) {
-        $("#status").text("Connected");
         $("#connect").prop("disabled", true);
         $("#disconnect").prop("disabled", false);
     } else {
         // Update UI or perform actions when disconnected
-        $("#status").text("Disconnected");
         $("#connect").prop("disabled", false);
         $("#disconnect").prop("disabled", true);
     }
@@ -113,4 +109,20 @@ $(document).ready(function () {
             // Enable the Connect button if there is some text in the input
             $("#connect").prop("disabled", $(this).val().trim() === "");
         });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    var messageInput = document.getElementById('message');
+    var destinationUsernameInput = document.getElementById('destination-username');
+    var sendButton = document.getElementById('send');
+
+    function updateSendButtonStatus() {
+        var isMessageEmpty = !messageInput.value.trim();
+        var isDestinationUsernameEmpty = !destinationUsernameInput.value.trim();
+        sendButton.disabled = isMessageEmpty || isDestinationUsernameEmpty;
+    }
+
+    // Attach the event listener to the input elements
+    messageInput.addEventListener('input', updateSendButtonStatus);
+    destinationUsernameInput.addEventListener('input', updateSendButtonStatus);
 });

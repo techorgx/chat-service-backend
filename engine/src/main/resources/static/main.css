@@ -87,10 +87,21 @@ body {
     background-color: #ccc;
 }
 
-.send:hover {
-      box-shadow: rgba(80, 63, 205, 0.5) 0 1px 30px;
-      transition-duration: .1s;
-    }
+#connect:disabled {
+    cursor: not-allowed;
+}
+
+#connect:disabled:hover {
+    background-color: #ccc;
+}
+
+#send:disabled {
+    cursor: not-allowed;
+}
+
+#send:disabled:hover {
+    background-color: #ccc;
+}
 
 @media (min-width: 768px) {
       .button-36 {
