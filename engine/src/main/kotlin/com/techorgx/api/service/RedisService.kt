@@ -13,7 +13,7 @@ class RedisService(
 ) {
     fun publishMessage(payloadString: String) {
         val payload = payloadMapper.mapPayload(payloadString)
-        redisAsyncCommands.publish(payload.username, payload.message)
+        redisAsyncCommands.publish(payload.destinationUsername, payload.message)
     }
 
     fun subscribeUser(username: String) {

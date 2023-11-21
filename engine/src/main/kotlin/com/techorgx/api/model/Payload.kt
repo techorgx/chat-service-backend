@@ -1,8 +1,9 @@
 package com.techorgx.api.model
 
 data class Payload (
-    val username: String,
+    val sourceUsername: String,
+    val destinationUsername: String,
     val message: String
 ) {
-    constructor() : this("", "")
+    constructor() : this("", "", "")
 }

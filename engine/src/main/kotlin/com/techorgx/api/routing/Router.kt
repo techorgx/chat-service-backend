@@ -15,6 +15,7 @@ class Router(
 ) {
     @MessageMapping("/send-message")
     fun handleMessage (@Payload payload: String) {
+        println("Payload: $payload")
         redisService.publishMessage(payload)
     }
 
@@ -24,7 +25,7 @@ class Router(
 
         val authToken = accessor.getFirstNativeHeader("Authorization")
         val username = accessor.getFirstNativeHeader("Username")
-
+        println("authToken: $authToken, username: $username")
         username?.let {
             redisService.subscribeUser(username)
         }  // A bug can be easily created here from front end side, try to avoid it.

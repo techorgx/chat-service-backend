@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+* {
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+.chats {
+    padding: 30px 15px 0 25px;
+}
+
+.msg-page {
+    max-height: 500px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.received-msg {
+    display: inline-block;
+    padding: 0 0 0 10px;
+    vertical-align: top;
+    width: 92%;
+}
+.received-msg-inbox {
+    width: 57%;
+}
+
+.received-msg-inbox p {
+    background: #efefef none repeat scroll 0 0;
+    border-radius: 10px;
+    color: #646464;
+    font-size: 14px;
+    margin-left: 1rem;
+    padding: 1rem;
+    width: 100%;
+    box-shadow: rgb(0 0 0 / 25%) 0px 5px 5px 2px;
+}
+    p {
+    overflow-wrap: break-word;
+}
+
+/* Styling the msg-sent time  */
+.time {
+    color: #777;
+    display: block;
+    font-size: 12px;
+    margin: 8px 0 0;
+}
+.outgoing-chats {
+    overflow: hidden;
+    margin: 26px 20px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.outgoing-chats-msg p {
+    background-color: #3a12ff;
+    background-image: linear-gradient(45deg, #ee087f 0%, #DD2A7B 25%, #9858ac 50%, #8134AF 75%, #515BD4 100%);
+    color: #fff;
+    border-radius: 10px;
+    font-size: 14px;
+    color: #fff;
+    padding: 5px 10px 5px 12px;
+    width: 100%;
+    padding: 1rem;
+    box-shadow: rgb(0 0 0 / 25%) 0px 2px 5px 2px;
+}
+.outgoing-chats-msg {
+        float: right;
+        width: 46%;
+    }
+
+@media only screen and (max-device-width: 850px) {
+    *,
+    .time {
+        font-size: 28px;
+    }
+    img {
+        width: 65px;
+    }
+    .msg-header {
+        height: 5%;
+    }
+    .msg-page {
+        max-height: none;
+        display: flex;
+        flex-direction: column;
+    }
+    .received-msg-inbox p {
+        font-size: 28px;
+    }
+    .outgoing-chats-msg p {
+        font-size: 28px;
+    }
+}
+
+@media only screen and (max-device-width: 450px) {
+    *,
+    .time {
+        font-size: 28px;
+    }
+    img {
+        width: 65px;
+    }
+    .msg-header {
+        height: 5%;
+    }
+    .msg-page {
+        max-height: none;
+        display: flex;
+        flex-direction: column;
+    }
+    .received-msg-inbox p {
+        font-size: 28px;
+    }
+    .outgoing-chats-msg p {
+        font-size: 28px;
+    }
+}
+
