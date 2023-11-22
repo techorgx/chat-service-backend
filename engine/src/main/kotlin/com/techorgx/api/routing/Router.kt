@@ -1,6 +1,5 @@
 package com.techorgx.api.routing
 
-import com.techorgx.api.interceptor.SessionChannelInterceptor
 import com.techorgx.api.service.RedisService
 import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger

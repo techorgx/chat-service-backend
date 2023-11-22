@@ -1,6 +1,5 @@
 package com.techorgx.api.service
 
-import com.techorgx.api.mapper.PayloadMapper
 import io.lettuce.core.api.async.RedisAsyncCommands
 import io.lettuce.core.pubsub.StatefulRedisPubSubConnection
 import org.springframework.stereotype.Service
