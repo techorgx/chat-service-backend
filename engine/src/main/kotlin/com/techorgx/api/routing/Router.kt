@@ -18,13 +18,4 @@ class Router(
         println("Payload: $payload")
         redisService.publishMessage(payload)
     }
-
-    @MessageMapping("/on-connect")
-    fun handleConnect(@Headers headers: Message<Any>) {
-        val accessor = SimpMessageHeaderAccessor.wrap(headers)
-
-        val authToken = accessor.getFirstNativeHeader("Authorization")
-        val username = accessor.getFirstNativeHeader("Username")
-        println("authToken: $authToken, username: $username")
-    }
 }

@@ -1,22 +1,39 @@
-const stompClient = new StompJs.Client({
-    brokerURL: 'ws://localhost:8080/chat-app'
-});
 
-function sendAuthenticationHeaders(connected) {
-       stompClient.publish({
-                   destination: '/app/on-connect',
-                   headers: {
-                       Authorization: 'Bearer your_token', // Replace with your actual authentication token
-                       Username: $("#source-username").val() // Replace with your actual username
-                   }
-         });
+var stompClient = null
+
+function connect() {
+    var headers = {
+       "Authorization": "Bearer your_token",
+       "Username": $("#source-username").val()
+    }
+    stompClient = new StompJs.Client({
+        brokerURL: 'ws://localhost:8080/chat-app',
+        connectHeaders: headers,
+        debug: function (str) {
+            console.log(str);
+          },
+        reconnectDelay: 5000,
+        heartbeatIncoming: 4000,
+        heartbeatOutgoing: 4000,
+    });
+    stompClient.activate();
+    stompClient.onConnect = connectCallback;
+    stompClient.onStompError = errorCallback;
+    stompClient.onDisconnect = function () {
+        setConnected(false);
+        console.log("Disconnected");
+    };
 }
 
-stompClient.onConnect = (frame) => {
-     setConnected(true);
-     sendAuthenticationHeaders(); // Sending headers only when connected
-     console.log('Connected: ' + frame);
-};
+
+function connectCallback(frame) {
+    console.log('Connected ' + frame);
+    setConnected(true);
+}
+
+function errorCallback() {
+   console.log('Error');
+}
 
 function setConnected(connected) {
     if (connected) {
@@ -27,10 +44,6 @@ function setConnected(connected) {
         $("#connect").prop("disabled", false);
         $("#disconnect").prop("disabled", true);
     }
-}
-
-function connect() {
-    stompClient.activate();
 }
 
 function disconnect() {
