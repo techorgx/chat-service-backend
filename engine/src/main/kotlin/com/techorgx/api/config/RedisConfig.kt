@@ -7,6 +7,8 @@ import io.lettuce.core.api.async.RedisAsyncCommands
 import io.lettuce.core.pubsub.RedisPubSubAdapter
 import io.lettuce.core.pubsub.RedisPubSubListener
 import io.lettuce.core.pubsub.StatefulRedisPubSubConnection
+import org.apache.logging.log4j.LogManager
+import org.apache.logging.log4j.Logger
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -46,7 +48,7 @@ open class RedisConfig(
     private var listener: RedisPubSubListener<String, String> = object : RedisPubSubAdapter<String, String>() {
         override fun message(channel: String, message: String) {
             val payload = payloadMapper.mapPayload(message)
-            println(String.format("Channel: %s, Message: %s", channel, payload))
+            logger.info(String.format("Channel: %s, Message: %s", channel, payload))
         }
     }
 
@@ -54,5 +56,9 @@ open class RedisConfig(
     fun onDestroy() {
         pubSubConnection.close()
         redisClient.shutdown()
+    }
+
+    private companion object {
+        val logger: Logger = LogManager.getLogger(RedisConfig::class.qualifiedName)
     }
 }
